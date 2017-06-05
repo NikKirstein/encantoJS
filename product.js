@@ -8,6 +8,7 @@
     queryParams.forEach(function(param, index) {
     if (param.indexOf("category") > -1) {
         let filterKey = param.split("=")[1];
+        console.log(filterKey);
         filterProducts(filterKey);
     }
     });
@@ -17,34 +18,36 @@
   // Category filtering onclick handler
   function filterProducts(product, selector) {
 
+
+    $('.cat-item').removeClass('active');
+    productCatsUl = $('.product-cats')
     $('.cat-item').each(function(index, e) {
       let catItem = $(this);
-      let bobert = $(this).children("a")[0];
-      console.log($(bobert));
-      let categorySelector = $(bobert).attr("href").split("/");
+      let pathList = $(this).children("a")[0];
+      let categorySelector = $(pathList).attr("href").split("/");
       let cat, subcat;
       categorySelector.forEach(function(pathName, index) {
         if(pathName === "product-category") {
-          cat = categorySelector[index + 1]
-
-          if (cat === product) {
-            catItem.addClass('active');
-          }
-
-          console.log(cat);
-          if(categorySelector[index + 2].length > 0) {
-            subcat = categorySelector[index + 2]
+          cat = categorySelector[index + 1];
+          if (categorySelector[index + 3] === "") {
+            subcat = categorySelector[index + 2];
           }
         }
 
-
+        if (product === subcat) {
+          $(catItem).addClass('active');
+          $(catItem).parent().parent().addClass('active');
+        }
+        else if (product === cat) {
+          $(catItem).addClass('active');
+        }
       });
 
       
 
     });
 
-    $('.cat-item').removeClass('active');
+    //$('.cat-item').removeClass('active');
     // selector.parent().addClass('active');
 
     // if ( typeof selector.data('showAll') !== 'undefined' ) {
@@ -64,11 +67,11 @@
     //         }
     //       }
     //     });
-      // }
+    // }
 
-      $('.product').parent().css('display', 'none');
-      $('.product_cat-' + product).parent().css('display', 'block');
-     // }
+       $('.product').parent().css('display', 'none');
+       $('.product_cat-' + product).parent().css('display', 'block');
+    // }
   };
 
 
