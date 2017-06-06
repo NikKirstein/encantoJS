@@ -8,7 +8,6 @@
     queryParams.forEach(function(param, index) {
     if (param.indexOf("category") > -1) {
         let filterKey = param.split("=")[1];
-        console.log(filterKey);
         filterProducts(filterKey);
     }
     });
@@ -18,16 +17,19 @@
   // Category filtering onclick handler
   function filterProducts(product, selector) {
 
-
     $('.cat-item').removeClass('active');
-    productCatsUl = $('.product-cats')
     $('.cat-item').each(function(index, e) {
       let catItem = $(this);
       let pathList = $(this).children("a")[0];
       let categorySelector = $(pathList).attr("href").split("/");
       let cat, subcat;
+      console.log(categorySelector);
       categorySelector.forEach(function(pathName, index) {
-        if(pathName === "product-category") {
+        if (pathName === "products") {
+          cat = categorySelector[index];
+        }
+
+        else if(pathName === "product-category") {
           cat = categorySelector[index + 1];
           if (categorySelector[index + 3] === "") {
             subcat = categorySelector[index + 2];
@@ -38,20 +40,24 @@
           $(catItem).addClass('active');
           $(catItem).parent().parent().addClass('active');
         }
+
+        // if (pathList.indexOf("data-show-all") > -1) {
+        //   console.log("triggering products if statement!")
+        //   $('.cat-item').removeClass('active');
+        //   $('.product').parent().css('display', 'block');
+        // }
+
         else if (product === cat) {
           $(catItem).addClass('active');
         }
       });
-
-      
-
     });
 
     //$('.cat-item').removeClass('active');
     // selector.parent().addClass('active');
 
-    // if ( typeof selector.data('showAll') !== 'undefined' ) {
-    //   $('.product').parent().css('display', 'block');
+     // if ( typeof selector.data('showAll') !== 'undefined' ) {
+     //   $('.product').parent().css('display', 'block');
     // } else {
 
     //   // let isChild = selector.closest('ul').hasClass('children');
