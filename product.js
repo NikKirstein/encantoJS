@@ -23,7 +23,6 @@
       let pathList = $(this).children("a")[0];
       let categorySelector = $(pathList).attr("href").split("/");
       let cat, subcat;
-      console.log(categorySelector);
       categorySelector.forEach(function(pathName, index) {
         if (pathName === "products") {
           cat = categorySelector[index];
@@ -40,12 +39,6 @@
           $(catItem).addClass('active');
           $(catItem).parent().parent().addClass('active');
         }
-
-        // if (pathList.indexOf("data-show-all") > -1) {
-        //   console.log("triggering products if statement!")
-        //   $('.cat-item').removeClass('active');
-        //   $('.product').parent().css('display', 'block');
-        // }
 
         else if (product === cat) {
           $(catItem).addClass('active');
@@ -74,9 +67,12 @@
     //       }
     //     });
     // }
-
-       $('.product').parent().css('display', 'none');
-       $('.product_cat-' + product).parent().css('display', 'block');
+      if(product === "products") {
+        $('.product').parent().css('display', 'block');
+      } else {
+        $('.product').parent().css('display', 'none');
+        $('.product_cat-' + product).parent().css('display', 'block');
+      }
     // }
   };
 
