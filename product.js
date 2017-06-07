@@ -46,34 +46,13 @@
       });
     });
 
-    //$('.cat-item').removeClass('active');
-    // selector.parent().addClass('active');
-
-     // if ( typeof selector.data('showAll') !== 'undefined' ) {
-     //   $('.product').parent().css('display', 'block');
-    // } else {
-
-    //   // let isChild = selector.closest('ul').hasClass('children');
-
-    //   if (isChild) {
-    //     let next = false;
-    //     selector.parents().each(function(index) {
-    //       if ( $(this).hasClass('cat-item') ) {
-    //         if (next) {
-    //           $(this).addClass('active');
-    //         } else {
-    //           next = true;
-    //         }
-    //       }
-    //     });
-    // }
+      //Comparing product against All, displays products based on query
       if(product === "products") {
         $('.product').parent().css('display', 'block');
       } else {
         $('.product').parent().css('display', 'none');
         $('.product_cat-' + product).parent().css('display', 'block');
       }
-    // }
   };
 
 
